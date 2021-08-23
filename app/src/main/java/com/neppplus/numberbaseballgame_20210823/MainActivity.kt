@@ -12,12 +12,17 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var mAdapter : MessageAdapter
 
+//    세자리 문제 숫자를 저장하기 위한 ArrayList
+    val mQuestionNumbers = ArrayList<Int>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mMessageList.add(  MessageData("안녕하세요", "CPU")  )
-        mMessageList.add(  MessageData("반갑습니다", "USER")  )
+
+//        세자리 랜덤 문제 만들기
+        makeQuestionNumbers()
+
 
         mAdapter = MessageAdapter(this, R.layout.message_list_item, mMessageList)
 
@@ -47,4 +52,22 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    fun makeQuestionNumbers() {
+
+//        고정된 세개 숫자를 임시 문제로.
+        mQuestionNumbers.add(4)
+        mQuestionNumbers.add(7)
+        mQuestionNumbers.add(1)
+
+//        환영 메세지를 채팅창에 띄우자.
+//        메세지 리스트에, 띄워줄 말들 데이터를 추가하자.
+
+        mMessageList.add(  MessageData("어서오세요.", "CPU")  )
+        mMessageList.add( MessageData("숫자야구 게임입니다.", "CPU") )
+        mMessageList.add( MessageData("세자리 숫자를 맞춰주세요.", "CPU") )
+
+
+    }
+
 }
