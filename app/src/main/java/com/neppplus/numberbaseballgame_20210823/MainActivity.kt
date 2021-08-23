@@ -2,6 +2,7 @@ package com.neppplus.numberbaseballgame_20210823
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.neppplus.numberbaseballgame_20210823.adapters.MessageAdapter
 import com.neppplus.numberbaseballgame_20210823.datas.MessageData
@@ -124,9 +125,50 @@ class MainActivity : AppCompatActivity() {
     fun makeQuestionNumbers() {
 
 //        고정된 세개 숫자를 임시 문제로.
-        mQuestionNumbers.add(4)
-        mQuestionNumbers.add(7)
-        mQuestionNumbers.add(1)
+//        mQuestionNumbers.add(4)
+//        mQuestionNumbers.add(7)
+//        mQuestionNumbers.add(1)
+
+//        랜덤한 3개 숫자를 진짜 문제로.
+//        1~9 숫자만 사용.
+//        이미 나온 숫자는 또 나오면 안됨.
+
+        for ( i  in 0..2) {
+
+            while (true) {
+
+//                1~9 사이의 랜덤 정수 추출
+                val randomNum = ( Math.random() * 9  + 1 ).toInt()
+
+//                mQue...에 이미 들어있는지 검사.
+
+                var isDuplOk = true
+
+                for ( num   in mQuestionNumbers ) {
+                    if (num == randomNum) {
+//                        중복된숫자 발견!! 쓰면 안된다.
+                        isDuplOk = false
+                    }
+                }
+
+//                중복검사를 통과한 상태로 유지 : 써도 된다. 배열에 추가해도 된다.
+                if (isDuplOk) {
+                    mQuestionNumbers.add( randomNum )
+//                    무한반복 탈출
+                    break
+                }
+
+
+            }
+
+        }
+
+
+        for (num  in mQuestionNumbers) {
+            Log.d("출제된숫자", num.toString())
+        }
+
+
 
 //        환영 메세지를 채팅창에 띄우자.
 //        메세지 리스트에, 띄워줄 말들 데이터를 추가하자.
