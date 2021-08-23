@@ -48,8 +48,59 @@ class MainActivity : AppCompatActivity() {
             messageListView.smoothScrollToPosition( mMessageList.size - 1 )
 
 
+//            컴퓨터가 ?S ?B인지 판단해서 메세지 추가. (답장)
+
+            checkAnswer( inputNumStr.toInt() )
+
         }
 
+
+    }
+
+    fun checkAnswer(inputNum : Int) {
+
+//        사람이 입력한 숫자가 ?S ?B인지 판단 하는 함수.
+
+//        사람이 입력한 숫자를 => 각 자리별로 나눠서 => 목록에 대입.
+
+        val userInputNumArr = ArrayList<Int>()
+
+        userInputNumArr.add(  inputNum / 100  )  // 100의자리가 몇? 456 : 4 => 4
+        userInputNumArr.add( inputNum / 10 % 10 ) // 10의자리가 몇? 456: 5 => 4"5"
+        userInputNumArr.add( inputNum % 10 ) // 1의자리가 몇? 456: 6 ?
+
+        var strikeCount = 0
+        var ballCount = 0
+
+        for ( i   in 0..2  ) {
+
+            for ( j   in 0..2 ) {
+
+//                내가 입력한 숫자 i번째랑,  컴퓨터가 낸 숫자 j번째가 같은 값인가?
+                if ( userInputNumArr[i] == mQuestionNumbers[j] ) {
+
+//                    같은 숫자를 찾았다!
+//                    위치도 같은 위치였는지? 같으면 S, 다르면 B
+                    if (i == j) {
+                        strikeCount++
+                    }
+                    else {
+                        ballCount++
+                    }
+
+                }
+
+            }
+
+        }
+
+
+//        ?S ?B인지를 컴퓨터가 말하는걸로 처리.
+        mMessageList.add(  MessageData("${strikeCount}S ${ballCount}B 입니다.", "CPU")  )
+
+        mAdapter.notifyDataSetChanged()
+
+        messageListView.smoothScrollToPosition( mMessageList.size - 1 )
 
     }
 
