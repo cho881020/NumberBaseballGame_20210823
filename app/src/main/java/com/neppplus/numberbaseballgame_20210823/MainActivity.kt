@@ -38,6 +38,10 @@ class MainActivity : AppCompatActivity() {
 
             numberEdt.setText("")
 
+//            리스트뷰를 최하단 (맨 마지막 데이터) 으로 내리고 싶다.
+
+            messageListView.smoothScrollToPosition( mMessageList.size - 1 )
+
 
         }
 
