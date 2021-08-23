@@ -2,6 +2,7 @@ package com.neppplus.numberbaseballgame_20210823
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.neppplus.numberbaseballgame_20210823.adapters.MessageAdapter
 import com.neppplus.numberbaseballgame_20210823.datas.MessageData
 import kotlinx.android.synthetic.main.activity_main.*
@@ -101,6 +102,22 @@ class MainActivity : AppCompatActivity() {
         mAdapter.notifyDataSetChanged()
 
         messageListView.smoothScrollToPosition( mMessageList.size - 1 )
+
+//        만약 3S였다 -> 축하한다는 메세지 추가 출력 -> 입력 못하게 막자.
+
+        if (strikeCount == 3) {
+            mMessageList.add(  MessageData("축하합니다! 정답을 맞췄습니다.", "CPU")  )
+
+            mAdapter.notifyDataSetChanged()
+
+            messageListView.smoothScrollToPosition( mMessageList.size - 1 )
+
+            Toast.makeText(this, "게임을 종료합니다.", Toast.LENGTH_SHORT).show()
+
+//            입력을 막는다 => numberEdt 를 enabled : false
+            numberEdt.isEnabled = false
+
+        }
 
     }
 
